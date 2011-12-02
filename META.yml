@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                Amazon-SQS-ProducerConsumer
-version:             0.01
+version:             0.02
 abstract:            Producer and Consumer classes for Amazon Simple Queue Service (SQS)
 license:             perl
 author:              
