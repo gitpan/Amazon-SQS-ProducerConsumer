@@ -14,6 +14,13 @@ WriteMakefile(
     PL_FILES            => {},
     PREREQ_PM => {
         'Test::More' => 0,
+				'XML::Simple' => 0,
+				'LWP::UserAgent' => 0,
+				'Digest::HMAC_SHA1' => 0,
+				'URI::Escape' => 0,
+				'MIME::Base64' => 0,
+				'Data::Dumper' => 0,
+				'JSON::XS' => 0
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Amazon-SQS-ProducerConsumer-*' },
