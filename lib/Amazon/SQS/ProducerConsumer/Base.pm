@@ -10,23 +10,24 @@ use Digest::HMAC_SHA1;
 use URI::Escape qw(uri_escape_utf8);
 use MIME::Base64 qw(encode_base64);
 
+
 =head1 NAME
 
 Amazon::SQS::ProducerConsumer::Base - Perl interface to the Amazon Simple Queue Service (SQS) environment
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 =head1 SYNOPSIS
 
- use Angel::Amazon::SQS;
+ use Amazon::SQS::ProducerConsumer::Base;
 
- my $sqs = new Angel::Amazon::SQS
+ my $sqs = new Amazon::SQS::ProducerConsumer::Base
 	AWSAccessKeyId => 'PUBLIC_KEY_HERE',
 	SecretAccessKey => 'SECRET_KEY_HERE';
 
@@ -61,9 +62,7 @@ sub initialize {
 	my $me = shift;
 	$me->{signature_version} = 2;
 	$me->{version} = '2009-02-01';
-	$me->{host} = 'queue.amazonaws.com';
-#	$me->{host} = 'sqs.us-east-1.amazonaws.com';
-#	$me->{ResourceURIPrefix} = $me->{host};
+	$me->{host} ||= 'queue.amazonaws.com';
 }
 
 sub create_queue {
@@ -197,9 +196,9 @@ sub sign_and_post {
 sub check_error {
 	my ($me, $xml) = @_;
 
-	if ( grep { defined && length } $xml->{Error} ) {
-		$me->debug("ERROR: $xml->{Error}{Message}");
-		$me->{error} = $xml->{Error}{Message};
+	if ( defined $xml->{Errors} && defined $xml->{Errors}{Error} ) {
+		$me->debug("ERROR: $xml->{Errors}{Error}{Message}");
+		$me->{error} = $xml->{Errors}{Error}{Message};
 		warn $me->{error};
 		return 1;
 	}

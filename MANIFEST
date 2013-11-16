@@ -2,9 +2,11 @@ Changes
 lib/Amazon/SQS/ProducerConsumer/Base.pm
 lib/Amazon/SQS/Producer.pm
 lib/Amazon/SQS/Consumer.pm
-Makefile.PL
+Build.PL
+ignore.txt
 MANIFEST			This list of files
 README
 t/00-load.t
-META.yml                                 Module YAML meta-data (added by MakeMaker)
-META.json                                Module JSON meta-data (added by MakeMaker)
+Makefile.PL
+META.yml
+META.json
